@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import { getAuth, GithubAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -19,7 +19,8 @@ const Login = () => {
 
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
-    // fucntion for google authentication
+    const facebookProvider = new FacebookAuthProvider();
+    //------------fucntion for google authentication
     const googleSignUp=()=>{
         signInWithPopup(auth, googleProvider)
             .then(result => {
@@ -33,7 +34,7 @@ const Login = () => {
             })
     }
 
-    // fucntion for google authentication
+    //--------- fucntion for github authentication
     const gitHubSignUp=()=>{
         signInWithPopup(auth, githubProvider)
             .then(result => {
@@ -47,6 +48,21 @@ const Login = () => {
             })
     }
 
+
+    //--------- fucntion for facebook authentication
+    const faceBookSignUp =()=>{
+        signInWithPopup(auth, facebookProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setShowPage(false);
+                setLoginUser(user);
+            })
+            .catch(error => {
+                console.error("Error: ", error);
+            })
+    }
+    
     const handleClose = () => setShow(false);
     const handleShow = () => {
         setMailsent('');
@@ -190,7 +206,7 @@ const Login = () => {
                 <div className='mt-3 d-flex flex-column align-items-center'>
                     <button className='btn btn-danger w-50 mt-2' onClick={googleSignUp}>Signup with Google </button>
                     <button className='btn btn-success w-50 mt-2' onClick={gitHubSignUp}>Signup with GitHub </button>
-                    <button className='btn btn-primary w-50 mt-2'>Signup with Facebook </button>
+                    <button className='btn btn-primary w-50 mt-2' onClick={faceBookSignUp}>Signup with Facebook </button>
                 </div>
             </div>}
 
