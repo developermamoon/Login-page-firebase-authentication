@@ -101,7 +101,7 @@ const Register  = () => {
             console.log(user);
             setLoginSuccess(true);
             setLogOutSuccess(false); 
-            // verifyEmail();
+            verifyEmail();
             form.reset();
             userNameSet(name);
             setLoginUser(user);
