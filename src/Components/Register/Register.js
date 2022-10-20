@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import app from '../../firebase/firebase.init';
-import {createUserWithEmailAndPassword, getAuth, sendEmailVerification} from 'firebase/auth';
+import {createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile} from 'firebase/auth';
 import { Link } from 'react-router-dom';
 
 const auth = getAuth(app);
@@ -19,6 +19,7 @@ const Register = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
+        const name = form.name.value;
         // console.log(email, password);
 
         if (!/(?=.*[A-Z].*[A-Z])/.test(password)){
@@ -36,14 +37,15 @@ const Register = () => {
 
         setIsPassword('');
 
-        //connection with firebase form email password authentication
-        createUserWithEmailAndPassword(auth, email, password)
+    //connection with firebase form email password authentication
+    createUserWithEmailAndPassword(auth, email, password)
         .then(result=>{
             const user = result.user;
             console.log(user);
             setLoginSuccess(true);  
             verifyEmail();
             form.reset();
+            userNameSet(name)
         })
         .catch(error=>{
             console.error('Error: ',error);
@@ -52,6 +54,7 @@ const Register = () => {
 
     }
 
+    //method for verify email address
     const verifyEmail = () =>{
         sendEmailVerification(auth.currentUser)
             .then(() => {
@@ -60,6 +63,19 @@ const Register = () => {
             .catch(error => {
                 console.error("Error: ", error);
             })
+    }
+
+    //method for sending user name in registration
+    const userNameSet = (name) => {
+        updateProfile(auth.currentUser,{
+            displayName: name
+        } )
+        .then(()=>{
+            console.log(name);
+        })
+        .catch(error => {
+            console.error("Error: ",error);
+        })
     }
     
     return (
