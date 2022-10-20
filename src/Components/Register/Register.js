@@ -4,10 +4,12 @@ import Form from 'react-bootstrap/Form';
 import app from '../../firebase/firebase.init';
 import {createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile} from 'firebase/auth';
 import { Link } from 'react-router-dom';
-
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faToggleOn } from '@fortawesome/free-solid-svg-icons'
 const auth = getAuth(app);
 
-const Register = () => {
+const Register  = () => {
     const [loginSuccess, setLoginSuccess] = useState(false);
     const [isPassword, setIsPassword] = useState('');
     
@@ -108,11 +110,17 @@ const Register = () => {
                 
                 
                 <div className='text-center'>
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" className='' type="submit">
                         Sign Up
                     </Button>
                 </div>
             </Form>
+
+            <div className='mt-3 d-flex flex-column align-items-center'>
+                <button className='btn btn-danger w-50 mt-2'>Signup with Google </button>
+                <button className='btn btn-success w-50 mt-2'>Signup with GitHub </button>
+                <button className='btn btn-primary w-50 mt-2'>Signup with Facebook </button>
+            </div>
         </div>
     );
 };

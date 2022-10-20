@@ -136,6 +136,13 @@ const Login = () => {
                 </Button>
                 
             </Form>
+
+            <div className='mt-3 d-flex flex-column align-items-center'>
+                <button className='btn btn-danger w-50 mt-2'>Signup with Google </button>
+                <button className='btn btn-success w-50 mt-2'>Signup with GitHub </button>
+                <button className='btn btn-primary w-50 mt-2'>Signup with Facebook </button>
+            </div>
+            
         </div>
     );
 };
