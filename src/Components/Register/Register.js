@@ -68,7 +68,8 @@ const Register = () => {
     //method for sending user name in registration
     const userNameSet = (name) => {
         updateProfile(auth.currentUser,{
-            displayName: name
+            displayName: name,
+            photoURL: '',
         } )
         .then(()=>{
             console.log(name);
@@ -82,6 +83,10 @@ const Register = () => {
         <div className='w-50 mx-auto border border-3 border-primary p-4 rounded-3'>
             <h2 className='text-secondary fw-bold text-center'>Sign Up</h2>
             <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" placeholder="Your Name" name='name' required />
+                </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Your email" name='email' required />
