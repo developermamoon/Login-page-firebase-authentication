@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,8 @@ import app from '../../firebase/firebase.init';
 const auth = getAuth(app);
 
 const Login = () => {
+
+    const [showError, setShowError] = useState('')
 
     const handleLogin = (event) =>{
         event.preventDefault();
@@ -24,6 +26,16 @@ const Login = () => {
         })
         .catch(error => {
             console.error("Error: ", error);
+            // setShowError(error.message);
+            if (error.message === "Firebase: Error (auth/wrong-password)."){
+                setShowError('Wrong Password')
+            }
+            else if (error.message === "Firebase: Error (auth/user-not-found)."){
+                setShowError("Invalid Email")
+            }
+            else{
+                setShowError('');
+            }
         })
     }
 
@@ -35,7 +47,7 @@ const Login = () => {
             <Form onSubmit={handleLogin}>
                 <h3 className='text-primary fw-bold text-center'>Login Page</h3>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>Email</Form.Label>
                     <Form.Control name='email' type="email" placeholder="Enter email" required/>
                 </Form.Group>
 
@@ -43,7 +55,11 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control name='password' type="password" placeholder="Password" required />
                 </Form.Group>
-                <p>Don't have an account? <Link to='/register'>Sign Up</Link></p>
+                <p className='text-danger'><small>{showError}</small></p>
+                <div className='d-flex align-items-center justify-content-between'>
+                    <p><small>Don't have an account? <Link to='/register'>Sign Up</Link></small></p>
+                    <p><button type='button' className='btn btn-link'><small>Forget Password</small></button></p>
+                </div>
                 <Button variant="primary" type="submit">
                     Login
                 </Button>

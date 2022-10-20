@@ -43,7 +43,7 @@ const Register = () => {
             const user = result.user;
             console.log(user);
             setLoginSuccess(true);  
-            verifyEmail();
+            // verifyEmail();
             form.reset();
             userNameSet(name)
         })
@@ -88,7 +88,7 @@ const Register = () => {
                     <Form.Control type="text" placeholder="Your Name" name='name' required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>Email</Form.Label>
                     <Form.Control type="email" placeholder="Your email" name='email' required />
                     <Form.Text className="text-muted" >
                         We'll never share your email with anyone else.
