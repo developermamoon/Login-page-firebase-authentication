@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -15,7 +15,22 @@ const Login = () => {
     const [loginUser, setLoginUser] = useState({})
     const [showError, setShowError] = useState('');
     const [show, setShow] = useState(false);
-    const [showPage, setShowPage] = useState(true)
+    const [showPage, setShowPage] = useState(true);
+
+    const googleProvider = new GoogleAuthProvider();
+
+    const googleSignUp=()=>{
+        signInWithPopup(auth, googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setShowPage(false);
+                setLoginUser(user);
+            })
+            .catch(error => {
+                console.error("Error: ", error);
+            })
+    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => {
@@ -158,7 +173,7 @@ const Login = () => {
                 </Form>
 
                 <div className='mt-3 d-flex flex-column align-items-center'>
-                    <button className='btn btn-danger w-50 mt-2'>Signup with Google </button>
+                    <button className='btn btn-danger w-50 mt-2' onClick={googleSignUp}>Signup with Google </button>
                     <button className='btn btn-success w-50 mt-2'>Signup with GitHub </button>
                     <button className='btn btn-primary w-50 mt-2'>Signup with Facebook </button>
                 </div>
