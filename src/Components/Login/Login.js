@@ -11,14 +11,14 @@ const auth = getAuth(app);
 
 const Login = () => {
 
-    const [showError, setShowError] = useState('')
+    const [showError, setShowError] = useState('');
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => {
+        setMailsent('');
         setShow(true);
         setIsDisabled(false);
-        setShowError('')
         };
 
     const [mailSent, setMailsent] = useState('');
@@ -64,6 +64,10 @@ const Login = () => {
         .catch(error => {
             console.error("Error: ", error);
             console.log(error.message);
+            const errorMessage = error.message;
+            if (errorMessage == "Firebase: Error (auth/user-not-found)."){
+                setMailsent("Mail not found.");
+            }
         })
     }
     
