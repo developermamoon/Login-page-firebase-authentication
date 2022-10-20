@@ -12,10 +12,12 @@ const auth = getAuth(app);
 
 const Login = () => {
 
-    const [loginUser, setLoginUser] = useState({})
-    const [showError, setShowError] = useState('');
-    const [show, setShow] = useState(false);
-    const [showPage, setShowPage] = useState(true);
+    const [loginUser, setLoginUser] = useState({}) //used for send data to user component
+    const [showError, setShowError] = useState(''); //user for warning if email or pass is false
+    const [show, setShow] = useState(false); //user in modal
+    const [showPage, setShowPage] = useState(true);  //user for show user component page
+    const [loginSuccess, setLoginSuccess] = useState(false);
+    const [logOutSuccess, setLogOutSuccess] = useState(false);
 
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
@@ -28,6 +30,8 @@ const Login = () => {
                 console.log(user);
                 setShowPage(false);
                 setLoginUser(user);
+                setLoginSuccess(true);
+                setLogOutSuccess(false);
             })
             .catch(error => {
                 console.error("Error: ", error);
@@ -42,6 +46,8 @@ const Login = () => {
                 console.log(user);
                 setShowPage(false);
                 setLoginUser(user);
+                setLoginSuccess(true);
+                setLogOutSuccess(false);
             })
             .catch(error => {
                 console.error("Error: ", error);
@@ -57,6 +63,8 @@ const Login = () => {
                 console.log(user);
                 setShowPage(false);
                 setLoginUser(user);
+                setLoginSuccess(true);
+                setLogOutSuccess(false);
             })
             .catch(error => {
                 console.error("Error: ", error);
@@ -87,7 +95,8 @@ const Login = () => {
             setShowPage(false);
             // console.log(user);
             form.reset();
-            setShowError("Login Successfull !!")
+            setLoginSuccess(true);
+            setLogOutSuccess(false);
         })
         .catch(error => {
             console.error("Error: ", error);
@@ -129,7 +138,9 @@ const Login = () => {
             .then(() => {
                 //sign out successful
                 console.log("Sign Out Successfully");
-                setShowPage(true)
+                setShowPage(true);
+                setLogOutSuccess(true);
+                setLoginSuccess(false);
             })
             .catch((error) => {
                 //error
@@ -154,6 +165,8 @@ const Login = () => {
                         <Form.Control name='password' type="password" placeholder="Password" required />
                     </Form.Group>
                     <p className='text-danger'><small>{showError}</small></p>
+                    {loginSuccess && <p className='text-success fw-bold'>Login Successful !!</p>}
+                    {logOutSuccess && <p className='text-success fw-bold'>Logout Successful !!</p>}
                     <div className='d-flex align-items-center justify-content-between'>
                         <p><small>Don't have an account? <Link to='/register'>Sign Up</Link></small></p>
 
@@ -180,6 +193,8 @@ const Login = () => {
                                         <Form.Control name='mail' type="email" placeholder="Enter email" required />
                                     </Form.Group>
 
+                                    
+
                                     {<p className="text-success">{mailSent}</p>}
                                     <Button variant="primary" disabled={isDisabled} type="submit" >
                                         Submit
@@ -204,15 +219,15 @@ const Login = () => {
                 </Form>
 
                 <div className='mt-3 d-flex flex-column align-items-center'>
-                    <button className='btn btn-danger w-50 mt-2' onClick={googleSignUp}>Signup with Google </button>
-                    <button className='btn btn-success w-50 mt-2' onClick={gitHubSignUp}>Signup with GitHub </button>
-                    <button className='btn btn-primary w-50 mt-2' onClick={faceBookSignUp}>Signup with Facebook </button>
+                    <button className='btn btn-danger w-50 mt-2' onClick={googleSignUp}>Login with Google </button>
+                    <button className='btn btn-success w-50 mt-2' onClick={gitHubSignUp}>Login with GitHub </button>
+                    <button className='btn btn-primary w-50 mt-2' onClick={faceBookSignUp}>Login with Facebook </button>
                 </div>
             </div>}
 
             {!showPage && <div className="container text-center mt-5">
                 <User data={loginUser}></User>
-                <button className="btn btn-danger" onClick={manageSignOut}>LogOut</button>
+                <button className="btn btn-danger" onClick={manageSignOut}>Logout</button>
             </div>}
 
             
