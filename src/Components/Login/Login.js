@@ -219,9 +219,9 @@ const Login = () => {
                 </Form>
 
                 <div className='mt-3 d-flex flex-column align-items-center'>
-                    <button className='btn btn-danger w-50 mt-2' onClick={googleSignUp}>Login with Google </button>
-                    <button className='btn btn-success w-50 mt-2' onClick={gitHubSignUp}>Login with GitHub </button>
-                    <button className='btn btn-primary w-50 mt-2' onClick={faceBookSignUp}>Login with Facebook </button>
+                    <button className='btn btn-danger w-50 mt-2' onClick={googleSignUp}>Login with Google <i class="fa-brands fa-google"></i> </button>
+                    <button className='btn btn-success w-50 mt-2' onClick={gitHubSignUp}>Login with GitHub <i class="fa-brands fa-github"></i> </button>
+                    <button className='btn btn-primary w-50 mt-2' onClick={faceBookSignUp}>Login with Facebook <i class="fa-brands fa-square-facebook"></i> </button>
                 </div>
             </div>}
 
