@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import app from '../../firebase/firebase.init';
 import User from "../User/User";
+import './Login.css'
 
 const auth = getAuth(app);
 
@@ -153,7 +154,7 @@ const Login = () => {
 
     return (
         <div>
-            {showPage && <div className='w-50 mx-auto border border-3 border-primary p-4 rounded-3'>
+            {showPage && <div className='border border-3 border-primary p-4 rounded-3 login-page mb-4'>
                 <Form onSubmit={handleLogin}>
                     <h3 className='text-primary fw-bold text-center'>Login Page</h3>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -167,7 +168,9 @@ const Login = () => {
                     <p className='text-danger'><small>{showError}</small></p>
                     {loginSuccess && <p className='text-success fw-bold'>Login Successful !!</p>}
                     {logOutSuccess && <p className='text-success fw-bold'>Logout Successful !!</p>}
-                    <div className='d-flex align-items-center justify-content-between'>
+                   
+                   
+                    <div className='d-md-flex align-items-center justify-content-between'>
                         <p><small>Don't have an account? <Link to='/register'>Sign Up</Link></small></p>
 
 
@@ -175,7 +178,7 @@ const Login = () => {
 
 
                         <p>
-                            <Button variant="btn btn-link" onClick={handleShow}>
+                            <Button className="p-0" variant="btn btn-link" onClick={handleShow}>
                                 <small>Forget Password</small>
                             </Button>
                         </p>
@@ -219,9 +222,9 @@ const Login = () => {
                 </Form>
 
                 <div className='mt-3 d-flex flex-column align-items-center'>
-                    <button className='btn btn-danger w-50 mt-2' onClick={googleSignUp}>Login with Google <i class="fa-brands fa-google"></i> </button>
-                    <button className='btn btn-success w-50 mt-2' onClick={gitHubSignUp}>Login with GitHub <i class="fa-brands fa-github"></i> </button>
-                    <button className='btn btn-primary w-50 mt-2' onClick={faceBookSignUp}>Login with Facebook <i class="fa-brands fa-square-facebook"></i> </button>
+                    <button className='btn btn-danger w-100 mt-2' onClick={googleSignUp}>Login with Google <i class="fa-brands fa-google"></i> </button>
+                    <button className='btn btn-success w-100 mt-2' onClick={gitHubSignUp}>Login with GitHub <i class="fa-brands fa-github"></i> </button>
+                    <button className='btn btn-primary w-100 mt-2' onClick={faceBookSignUp}>Login with Facebook <i class="fa-brands fa-square-facebook"></i> </button>
                 </div>
             </div>}
 

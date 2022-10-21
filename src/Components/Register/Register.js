@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import User from '../User/User';
+import './Register.css'
 const auth = getAuth(app);
 
 const Register  = () => {
@@ -101,7 +102,7 @@ const Register  = () => {
             console.log(user);
             setLoginSuccess(true);
             setLogOutSuccess(false); 
-            verifyEmail();
+            // verifyEmail();
             form.reset();
             userNameSet(name);
             setLoginUser(user);
@@ -156,8 +157,8 @@ const Register  = () => {
     }
     
     return (
-        <div >
-            {showPage && <div className='w-50 mx-auto border border-3 border-primary p-4 rounded-3'>
+        <div>
+            {showPage && <div className='border border-3 border-primary p-4 rounded-3 register-page mb-4'>
                 <h2 className='text-secondary fw-bold text-center'>Sign Up</h2>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -193,9 +194,9 @@ const Register  = () => {
                 </Form>
 
                 <div className='mt-3 d-flex flex-column align-items-center'>
-                    <button className='btn btn-danger w-50 mt-2' onClick={googleSignUp}>Signup with Google <i class="fa-brands fa-google"></i></button>
-                    <button className='btn btn-success w-50 mt-2' onClick={gitHubSignUp}>Signup with GitHub <i class="fa-brands fa-github"></i> </button>
-                    <button className='btn btn-primary w-50 mt-2' onClick={faceBookSignUp}>Signup with Facebook <i class="fa-brands fa-square-facebook"></i> </button>
+                    <button className='btn btn-danger w-100 mt-2' onClick={googleSignUp}>Signup with Google <i class="fa-brands fa-google"></i></button>
+                    <button className='btn btn-success w-100 mt-2' onClick={gitHubSignUp}>Signup with GitHub <i class="fa-brands fa-github"></i> </button>
+                    <button className='btn btn-primary w-100 mt-2' onClick={faceBookSignUp}>Signup with Facebook <i class="fa-brands fa-square-facebook"></i> </button>
                 </div>
             </div>}
 
